@@ -17,8 +17,9 @@ public class AlertRabbit {
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             scheduler.start();
             JobDetail job = newJob(Rabbit.class).build();
+            AlertRabbit rabbit = new AlertRabbit();
             SimpleScheduleBuilder times = simpleSchedule()
-                    .withIntervalInSeconds(10)
+                    .withIntervalInSeconds(rabbit.getRabbitInterval("rabbit.properties"))
                     .repeatForever();
             Trigger trigger = newTrigger()
                     .startNow()
@@ -33,7 +34,7 @@ public class AlertRabbit {
     /**
      *     added method
      */
-    public int getProperties(String path) {
+    public int getRabbitInterval(String path) {
         Properties properties = new Properties();
         try (FileReader fileReader = new FileReader(path)) {
             properties.load(fileReader);
