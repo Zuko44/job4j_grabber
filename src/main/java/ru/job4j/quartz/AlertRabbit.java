@@ -31,7 +31,7 @@ public class AlertRabbit {
     }
 
     /**
-     *  added method
+     *   added method
      */
     public int getProperties(String path) {
         Properties properties = new Properties();
