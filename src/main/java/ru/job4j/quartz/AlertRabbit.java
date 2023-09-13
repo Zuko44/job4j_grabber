@@ -5,6 +5,7 @@ import org.quartz.impl.StdSchedulerFactory;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -44,10 +45,10 @@ public class AlertRabbit {
         }
     }
 
-    private static Properties init() {
+    private static Properties initProperties() {
         Properties prop = new Properties();
-        try (FileReader fileReader = new FileReader("src/main/resources/rabbit.properties")) {
-            prop.load(fileReader);
+        try (InputStream in = AlertRabbit.class.getClassLoader().getResourceAsStream("app.properties")) {
+            prop.load(in);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,7 +56,7 @@ public class AlertRabbit {
     }
 
     private static Connection initConnection() throws SQLException, ClassNotFoundException {
-        Properties prop = init();
+        Properties prop = initProperties();
         Class.forName(prop.getProperty("driver_class"));
         String url = prop.getProperty("url");
         String login = prop.getProperty("username");
@@ -64,7 +65,7 @@ public class AlertRabbit {
     }
 
     public int getRabbitInterval() {
-        Properties properties = init();
+        Properties properties = initProperties();
         return Integer.parseInt(properties.getProperty("rabbit.interval"));
     }
 
