@@ -29,7 +29,7 @@ public class AlertRabbit {
                     .build();
             AlertRabbit rabbit = new AlertRabbit();
             SimpleScheduleBuilder times = simpleSchedule()
-                    .withIntervalInSeconds(rabbit.getRabbitInterval("src/main/resources/rabbit.properties"))
+                    .withIntervalInSeconds(rabbit.getRabbitInterval())
                     .repeatForever();
             Trigger trigger = newTrigger()
                     .startNow()
@@ -44,13 +44,18 @@ public class AlertRabbit {
         }
     }
 
-    private static Connection initConnection() throws SQLException, ClassNotFoundException {
+    private static Properties init() {
         Properties prop = new Properties();
         try (FileReader fileReader = new FileReader("src/main/resources/rabbit.properties")) {
             prop.load(fileReader);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return prop;
+    }
+
+    private static Connection initConnection() throws SQLException, ClassNotFoundException {
+        Properties prop = init();
         Class.forName(prop.getProperty("driver_class"));
         String url = prop.getProperty("url");
         String login = prop.getProperty("username");
@@ -58,13 +63,8 @@ public class AlertRabbit {
         return DriverManager.getConnection(url, login, password);
     }
 
-    public int getRabbitInterval(String path) {
-        Properties properties = new Properties();
-        try (FileReader fileReader = new FileReader(path)) {
-            properties.load(fileReader);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public int getRabbitInterval() {
+        Properties properties = init();
         return Integer.parseInt(properties.getProperty("rabbit.interval"));
     }
 
