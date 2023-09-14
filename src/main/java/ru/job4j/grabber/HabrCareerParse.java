@@ -1,4 +1,4 @@
-package ru.job4j.quartz;
+package ru.job4j.grabber;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -24,6 +24,7 @@ public class HabrCareerParse {
                 Element linkElement = titleElement.child(0);
                 String vacancyName = titleElement.text();
                 String link = String.format("%s%s", SOURCE_LINK, linkElement.attr("href"));
+                /** edited time */
                 Element published = row.select(".vacancy-card__date").get(0);
                 String publishedTwo = published.child(0).attr("datetime");
                 System.out.printf("Вакансия - %s, дата публикации - %s, %s%n", vacancyName, publishedTwo, link);
