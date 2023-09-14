@@ -22,8 +22,9 @@ public class HabrCareerParse {
             Element linkElement = titleElement.child(0);
             String vacancyName = titleElement.text();
             String link = String.format("%s%s", SOURCE_LINK, linkElement.attr("href"));
-            String time = row.select(".vacancy-card__date").first().text();
-            System.out.printf("Вакансия - %s, дата публикации - %s, %s%n", vacancyName, time, link);
+            Element published = row.select(".vacancy-card__date").get(0);
+            String publishedTwo = published.child(0).attr("datetime");
+            System.out.printf("Вакансия - %s, дата публикации - %s, %s%n", vacancyName, publishedTwo, link);
         });
     }
 }
