@@ -3,7 +3,6 @@ package ru.job4j.quartz;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
