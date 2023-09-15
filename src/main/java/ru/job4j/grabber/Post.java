@@ -10,6 +10,10 @@ public class Post {
     private String description;
     private LocalDateTime created;
 
+    public Post() {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -48,6 +52,13 @@ public class Post {
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" + "id=" + id + ", title='" + title + '\'' + ", link='"
+                + link + '\'' + ", description='" + description + '\''
+                + ", created=" + created + '}';
     }
 
     @Override
