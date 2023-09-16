@@ -1,6 +1,6 @@
 create table post(
 	id serial primary key,
-	name varchar(255),
+	name text,
 	description text,
 	link text unique,
 	created timestamp
