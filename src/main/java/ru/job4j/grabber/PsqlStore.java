@@ -21,7 +21,7 @@ public class PsqlStore implements Store {
         cnn = DriverManager.getConnection(url, login, password);
     }
 
-    public static void main(String[] args) {
+    /**public static void main(String[] args) {
         Properties prop = new Properties();
         try (InputStream in = PsqlStore.class.getClassLoader().getResourceAsStream("rabbit.properties")) {
             prop.load(in);
@@ -43,7 +43,7 @@ public class PsqlStore implements Store {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     @Override
     public void save(Post post) {

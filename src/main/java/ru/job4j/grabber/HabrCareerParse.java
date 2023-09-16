@@ -23,13 +23,13 @@ public class HabrCareerParse implements Parse {
         this.dateTimeParser = dateTimeParser;
     }
 
-    public static void main(String[] args) throws IOException {
+    /**public static void main(String[] args) throws IOException {
         HabrCareerParse parse = new HabrCareerParse(new HabrCareerDateTimeParser());
         List<Post> list = parse.list(SOURCE_LINK + PAGE_LINK);
         for (Post post : list) {
             System.out.println(post);
         }
-    }
+    }*/
 
     public List<Post> list(String link) throws IOException {
         List<Post> list = new ArrayList<>();
